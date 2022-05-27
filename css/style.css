@@ -2,46 +2,52 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
-.label
-{
 
+.subject {
+    margin: auto auto auto 25px;
 }
-.label-div
-{padding-left: 25px;
+
+.label-div {
+    padding-left: 25px;
     margin-bottom: 10px;
 }
+
 .top-container {
     background-color: #f1f1f1;
-    padding: 5px 5px 20px 5px;
+    padding: 5px 5px 5px 5px;
+    display: inline-block;
 }
-.middle-container
-{
+
+.header {
+    padding: 0;
+    padding: 10px 16px;
+    display: flex;
+    
+}
+
+.experiment-heading {
+    margin: 25px;
+}
+
+.middle-container {
     padding: 25px 25px 25px 25px;
 }
-button
-{
+
+button {
     margin-left: 25px;
     height: 30px;
     width: 80px;
 }
-.header {
-    margin: 0px;
-    padding: 10px 16px;
-    background: #555;
-    color: #f1f1f1;
+
+.header-img {
+    margin: 0 0 0 auto;
+    height: 90px;
+
 }
 
-.header-img
-{
-
-    width: 150px;
-    float: left;
-    display: inline-block;
-}
-.header-img2
-{
-    width: 90px;
-    float: right;
+.header-img2 {
+    height: 90px;
+    margin: 0;
 
 }
 
@@ -55,16 +61,18 @@ button
     width: 100%;
 }
 
-.sticky + .content {
+.sticky+.content {
     padding-top: 102px;
 }
-h1
-{
-    margin-top:30px;
 
+h1 {
+    margin-top: 30px;
+    display: inline-block;
     text-align: center;
-    margin-bottom: 12px;
+
+    margin: auto;
 }
+
 .topnav {
     background-color: #333;
     overflow: hidden;
@@ -91,11 +99,7 @@ h1
     background-color: black;
     color: white;
 }
-.subject
-{
-    text-align: center;
-}
-.experiment
-{
+
+.experiment {
     margin: 15px;
 }
