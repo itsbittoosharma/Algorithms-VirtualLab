@@ -103,3 +103,11 @@ h1 {
 .experiment {
     margin: 15px;
 }
+
+#downloadButton{
+    text-decoration: none;
+}
+
+#downloadButton:hover{
+    background-color: bisque;
+}

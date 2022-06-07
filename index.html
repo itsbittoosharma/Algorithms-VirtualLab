@@ -42,21 +42,42 @@
     </div>
     <div class="middle-container">
       <form action="#">
-        <div class="label-div"><label for="time" class="label">Enter Time (in Seconds) : </label>
-          <input type="number" id="time" name="time" min="1" max="10"></div>
+        <div class="label-div"><label for="time" class="label">Enter Time (in microseconds) : </label>
+          <input type="range" id="time" name="time" min="1" max="50" oninput="this.nextElementSibling.value = this.value">
+          <output></output>
+        </div>
         <div class="label-div">
         <label for="algo" class="label">Choose an Algorithm:</label>
         <select id="algo" name="algo">
-          <option value="search">Binary and sequential search</option>
-          <option value="quickSort">Quicksort</option>
+          <option value="binarySearch">Binary search</option>
+          <option value="sequentialSearch">Sequential search</option>
+          <option value="quickSort" selected>Quick sort</option>
+          <option value="matrixAddition">Matrix Addition</option>
+          <option value="matrixMultiplication">Matrix Multiplication</option>
+          <option value="subsetGeneration">Subset Generation</option>
+          <option value="permutationGeneration">Permutations generation</option>
         </select>
         </div>
-        <div><button type="button">Sumbit</button></div>
+        <div><button id="submitButton" type="button">Submit</button></div>
       </form>
+      <br>
+      <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+      <a id="download"
+        download="ChartImage.jpg" 
+        href=""
+        class="btn btn-primary float-right bg-flat-color-1"
+        title="Descargar Gráfico">
+        <div><button id="downloadButton" type="button">Download</button></div>
+        <!-- Download Icon -->
+      <i class="fa fa-download"></i>
+      </a>
+
     </div>
     <div class="bottom-container">
 
     </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <script src="js/nav.js"></script>
   </body>
 </html>
