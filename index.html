@@ -6,6 +6,7 @@
     <meta name="author" content="Dayalbagh Educational Institute">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Loading.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&amp;family=Raleway&amp;display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico">
     <title>DAA - Virtual Lab</title>
@@ -42,13 +43,9 @@
     </div>
     <div class="middle-container">
       <form action="#">
-        <div class="label-div"><label for="time" class="label">Enter Time (in microseconds) : </label>
-          <input type="range" id="time" name="time" min="1" max="50" oninput="this.nextElementSibling.value = this.value">
-          <output></output>
-        </div>
         <div class="label-div">
         <label for="algo" class="label">Choose an Algorithm:</label>
-        <select id="algo" name="algo">
+        <select id="algo" name="algo" onchange="getText(this)">
           <option value="binarySearch">Binary search</option>
           <option value="sequentialSearch">Sequential search</option>
           <option value="quickSort" selected>Quick sort</option>
@@ -58,7 +55,23 @@
           <option value="permutationGeneration">Permutations generation</option>
         </select>
         </div>
+        <div class="label-div"><label for="time" id="label_text" class="label">Time (in milliseconds) : </label>
+          <input type="range" id="time" name="time" min="1" max="30" oninput="this.nextElementSibling.value = this.value">
+          <output></output>
+        </div>
         <div><button id="submitButton" type="button">Submit</button></div>
+        <div class="center" id="loader">
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+        </div>
       </form>
       <br>
       <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
@@ -67,7 +80,7 @@
         download="ChartImage.jpg" 
         href=""
         class="btn btn-primary float-right bg-flat-color-1"
-        title="Descargar Gráfico">
+        title="Download Image">
         <div><button id="downloadButton" type="button">Download</button></div>
         <!-- Download Icon -->
       <i class="fa fa-download"></i>

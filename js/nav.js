@@ -1,8 +1,25 @@
 document.getElementById("downloadButton").style.display="none";
 document.getElementById("myChart").style.display="none";
 
+var label=new Array();
+label[0]="Time (in microseconds)";
+label[1]="Time (in microseconds)";
+label[2]="Time (in milliseconds)";
+label[3]="Time (in milliseconds)";
+label[4]="Time (in milliseconds)";
+label[5]="Time (in seconds)";
+label[6]="Time (in seconds)";
+
+function getText(selection)
+{
+  txtSelected = selection.selectedIndex;
+  document.getElementById('label_text').innerHTML = label[txtSelected];
+}
+
 document.getElementById("submitButton").onclick=function()
 {
+
+  document.getElementById("loader").style.display='flex';
 
   if(document.getElementById("time").value==="")
   {
@@ -103,6 +120,16 @@ function matrixAddition(array1, array2) {
 }
 
 
+function matrixMultiplication(array1, array2){
+  var result=0;
+  for(let i=0; i<array1.length; ++i){
+    result+=array1[i]*array2[i];
+  }
+
+  return;
+}
+
+
 function subsetGeneration(array) 
 {
 
@@ -117,36 +144,26 @@ function subsetGeneration(array)
 
   var result = [];
   fork(0, []);
-  return ;
+  delete result;
+  return;
 }
 
-function permutationGeneration(array,size,n)
-{
-        // if size becomes 1 then stop
-        if (size == 1)
-            return ;
-  
-        for (let i = 0; i < size; i++) {
-            permutationGeneration(array, size - 1, n);
-  
-            // if size is odd, swap 0th i.e (first) and
-            // (size-1)th i.e (last) element
-            if (size % 2 == 1) {
-                let temp = array[0];
-                array[0] = array[size - 1];
-                array[size - 1] = temp;
-            }
-  
-            // If size is even, swap ith
-            // and (size-1)th i.e last element
-            else {
-                let temp = array[i];
-                array[i] = array[size - 1];
-                array[size - 1] = temp;
-            }
-        }
-}
-  
+const permutationGeneration = (arr = []) => {
+  let res = []
+  const helper = (arr2) => {
+     if (arr2.length==arr.length)
+     return res.push(arr2)
+     for(let e of arr)
+     if (!arr2.includes(e))
+     helper([...arr2, e])
+  };
+  helper([])
+
+  delete result;
+  return;
+};
+
+
   var timeLimit=document.getElementById("time").value;
   var timeReq=0;
   var size=1;
@@ -154,8 +171,7 @@ function permutationGeneration(array,size,n)
   var timeArray=new Array();
   var algorithm=document.getElementById("algo").value;
 
-  
-
+  outerloop:
   while(timeReq < timeLimit)
   {
     
@@ -166,14 +182,14 @@ function permutationGeneration(array,size,n)
       case "binarySearch":
         randArray.sort(function(a, b){return a - b});
         timeReq = new Date().getTime();
-        binarySearch(randArray, randArray[Math.floor(Math.random() * randArray.length)]);
+        binarySearch(randArray, randArray[size-1]);
         timeReq = (new Date().getTime()) - timeReq;
         break;
 
       case "sequentialSearch":
         timeReq = new Date().getTime();
-        sequentialSearch(randArray, randArray[Math.floor(Math.random() * randArray.length)]);
-        timeReq = (new Date().getTime()) - timeReq;
+        sequentialSearch(randArray, randArray[size-1]);
+        timeReq = ((new Date().getTime()) - timeReq);
         break;
 
       case "quickSort":
@@ -189,19 +205,27 @@ function permutationGeneration(array,size,n)
         break;
 
       case "matrixMultiplication":
-        //code
+        timeReq = new Date().getTime();
+        matrixMultiplication(randArray, randArray);
+        timeReq = (new Date().getTime()) - timeReq;
         break;
 
       case "subsetGeneration":
+        if(size==26){
+          break outerloop;
+        }
         timeReq = new Date().getTime();
         subsetGeneration(randArray);
-        timeReq = (new Date().getTime()) - timeReq;
+        timeReq = ((new Date().getTime()) - timeReq)/1000;
         break;
 
       case "permutationGeneration":
+        if(size==11){
+          break outerloop;
+        }
         timeReq = new Date().getTime();
-        permutationGeneration(randArray, randArray.length, randArray.length);
-        timeReq = (new Date().getTime()) - timeReq;
+        permutationGeneration(randArray);
+        timeReq = ((new Date().getTime()) - timeReq)/1000;
         break;
 
       default:
@@ -213,12 +237,16 @@ function permutationGeneration(array,size,n)
       sizeArray.push(size);
       timeArray.push(timeReq);
     }
-
-    size=size*2;
+    
+    if(algorithm=="subsetGeneration" || algorithm=="permutationGeneration"){
+      size=size+1;
+    }
+    else{
+      size=size*2;
+    }
   }
 
-
-  var xValues = timeArray;
+var xValues = timeArray;
 
 new Chart("myChart", 
 {
@@ -227,6 +255,7 @@ new Chart("myChart",
   {
     labels: xValues,
     datasets: [{
+      label: "Size",
       data: sizeArray,
       borderColor: "green",
       fill: false
@@ -234,7 +263,23 @@ new Chart("myChart",
   },
   options: 
   {
-    legend: {display: false}
+    legend: {display: false},
+    scales: {
+      xAxes: [{
+        display: true,
+        scaleLabel: {
+            display: true,
+            labelString: document.getElementById("label_text").innerHTML
+        },
+    }],
+     yAxes: [{
+        display: true,
+        scaleLabel: {
+           display: true,
+           labelString: "Size (no. of elements)"
+       }
+    }]
+  }
   }
 });
 
