@@ -258,7 +258,8 @@ new Chart("myChart",
       label: "Size",
       data: sizeArray,
       borderColor: "green",
-      fill: false
+      fill: false,
+      showLine: true
     }]
   },
   options: 
@@ -270,7 +271,7 @@ new Chart("myChart",
         scaleLabel: {
             display: true,
             labelString: document.getElementById("label_text").innerHTML
-        },
+        }
     }],
      yAxes: [{
         display: true,
