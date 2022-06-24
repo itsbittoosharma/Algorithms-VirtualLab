@@ -1,5 +1,7 @@
-function matrixAddition(array1,size) {
+function matrixAddition(array,size) {
     for(let i=0; i<size; ++i){
-      array1[0]+array1[0];
+      for(let j=0; j<size; ++j){
+        var result=array[0]+array[0];
+      }
     }
   }
