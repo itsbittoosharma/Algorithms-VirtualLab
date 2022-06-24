@@ -1,6 +1,10 @@
-function matrixMultiplication(array1,size){
-    var result=0;
+function matrixMultiplication(array,size){
     for(let i=0; i<size; ++i){
-      result+=array1[0]*array1[0];
+      for(let j=0; j<size; ++j){
+        var result=0;
+        for(let k=0; k<size; ++k){
+          result+=array[0]*array[0];
+        }
+      }
     }
   }
