@@ -32,7 +32,35 @@ document.getElementById("submitButton").onclick=function()
     var size=1;
     var sizeArray=new Array();
     var timeArray=new Array();
-
+    var sizeofArr=0;
+    if (algorithm == 'binarySearch') 
+    {
+      var randArray = Array.from({ length: 100000 }, () => Math.floor(Math.random() * 100000));
+      randArray.sort(function (a, b) { return a - b });
+      
+      var loop = 1; //100000 size
+      while (timeReq < timeLimit) 
+      {
+        var i = 0;
+        var startTime = window.performance.now();
+        for (i = 0; i < loop; ) {
+          binarySearch(randArray, randArray[99]);
+          i+=1;
+        }
+        var endtime = window.performance.now();
+        timeReq = timeReq+(endtime - startTime);
+        sizeofArr = sizeofArr + (i * 100000);
+        loop +=100;
+  
+        if (timeReq < timeLimit) {
+          sizeArray.push(sizeofArr);
+          timeArray.push(Math.round(timeReq*100)/100);
+        }
+  
+      }
+    }
+    else
+    {
     var randArray=Array.from({length : size}, () => Math.floor(Math.random() * 100000));
 
     outerloop:
@@ -110,6 +138,8 @@ document.getElementById("submitButton").onclick=function()
         size=size*2;
       }
     }
+  }
+
 
 
     //Calculating size for exact time Limit (Hahahahahahahaaa)
