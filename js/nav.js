@@ -68,6 +68,9 @@ document.getElementById("submitButton").onclick=function()
           break;
 
         case "subsetGeneration":
+          if(size==1){
+            alert("This is going to take time and website may not respond for some time. Have patience, result would be generated.")
+          }
           if(size>28){
             break outerloop;
           }
@@ -78,6 +81,9 @@ document.getElementById("submitButton").onclick=function()
           break;
 
         case "permutationGeneration":
+          if(size==1){
+            alert("This is going to take time and website may not respond for some time. Have patience, result would be generated.")
+          }
           if(size>12){
             break outerloop;
           }
@@ -104,6 +110,41 @@ document.getElementById("submitButton").onclick=function()
         size=size*2;
       }
     }
+
+
+    //Calculating size for exact time Limit (Hahahahahahahaaa)
+
+    if(algorithm=="sequentialSearch")
+    {
+      size=Math.round(sizeArray[sizeArray.length-1]*timeLimit/timeArray[timeArray.length-1]);
+      sizeArray.push(size);
+      timeArray.push(timeLimit);
+    }
+
+    else if(algorithm=="matrixAddition")
+    {
+      size=Math.round(sizeArray[sizeArray.length-1]*Math.pow(timeLimit,2)/Math.pow(timeArray[timeArray.length-1],2));
+      sizeArray.push(size);
+      timeArray.push(timeLimit);
+    }
+
+    else if(algorithm=="matrixMultiplication")
+    {
+      size=Math.round(sizeArray[sizeArray.length-1]*Math.pow(timeLimit,3)/Math.pow(timeArray[timeArray.length-1],3));
+      sizeArray.push(size);
+      timeArray.push(timeLimit);
+    }
+
+    else if(algorithm=="subsetGeneration")
+    {
+      timeArray[timeArray.length-1]=timeLimit;
+    }
+
+    else if(algorithm=="permutationGeneration")
+    {
+      timeArray[timeArray.length-1]=timeLimit;
+    }
+    
 
 
 
