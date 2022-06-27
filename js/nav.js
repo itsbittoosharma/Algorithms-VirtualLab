@@ -123,14 +123,14 @@ document.getElementById("submitButton").onclick=function()
 
     else if(algorithm=="matrixAddition")
     {
-      size=Math.round(sizeArray[sizeArray.length-1]*Math.pow(timeLimit,2)/Math.pow(timeArray[timeArray.length-1],2));
+      size=Math.round(Math.sqrt(timeLimit/timeArray[timeArray.length-1])*sizeArray[sizeArray.length-1]);
       sizeArray.push(size);
       timeArray.push(timeLimit);
     }
 
     else if(algorithm=="matrixMultiplication")
     {
-      size=Math.round(sizeArray[sizeArray.length-1]*Math.pow(timeLimit,3)/Math.pow(timeArray[timeArray.length-1],3));
+      size=Math.round(Math.cbrt(timeLimit/timeArray[timeArray.length-1])*sizeArray[sizeArray.length-1]);
       sizeArray.push(size);
       timeArray.push(timeLimit);
     }
