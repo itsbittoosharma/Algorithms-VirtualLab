@@ -4,7 +4,7 @@ document.getElementById("myChart").style.display="none";
 
 
 var label=new Array();
-label[0]="Time (in microseconds)";
+label[0]="Time (in nanoseconds)";
 label[1]="Time (in milliseconds)";
 label[2]="Time (in milliseconds)";
 label[3]="Time (in milliseconds)";
@@ -29,32 +29,35 @@ document.getElementById("submitButton").onclick=function()
   if(algorithm!="quickSort")
   {
     var timeReq=0;
-    var size=1;
+    var arrSize=1000000;
+    var size=arrSize;
+    timeLimit=timeLimit*0.001;
     var sizeArray=new Array();
     var timeArray=new Array();
     var sizeofArr=0;
     if (algorithm == 'binarySearch') 
     {
-      var randArray = Array.from({ length: 100000 }, () => Math.floor(Math.random() * 100000));
+      var randArray = Array.from({ length: arrSize }, () => Math.floor(Math.random() * arrSize));
       randArray.sort(function (a, b) { return a - b });
       
       var loop = 1; //100000 size
       while (timeReq < timeLimit) 
       {
-        var i = 0;
         var startTime = window.performance.now();
-        for (i = 0; i < loop; ) {
+        for (var i = 1; i <= loop; i++) {
+          for(var j=0;j<10000;j++)
           binarySearch(randArray, randArray[99]);
-          i+=1;
+          
         }
         var endtime = window.performance.now();
-        timeReq = timeReq+(endtime - startTime);
-        sizeofArr = sizeofArr + (i * 100000);
-        loop +=100;
-  
+        timeReq = (endtime - startTime)/10000;
+        sizeofArr = (loop * arrSize);
+        loop +=10;
+        console.log(timeReq);
         if (timeReq < timeLimit) {
           sizeArray.push(sizeofArr);
-          timeArray.push(Math.round(timeReq*100)/100);
+          // timeArray.push((timeReq*0.001));
+          timeArray.push(Math.round((timeReq/0.001)*100)/100);
         }
   
       }
@@ -69,14 +72,6 @@ document.getElementById("submitButton").onclick=function()
 
       switch (algorithm)
       {
-        case "binarySearch":
-          randArray=Array.from({length : size}, () => Math.floor(Math.random() * 100000));
-          randArray.sort(function(a, b){return a - b});
-          timeReq = performance.now();
-          binarySearch(randArray, randArray[size-1]);
-          timeReq = Math.round((performance.now() - timeReq)*1000);
-          break;
-
         case "sequentialSearch":
           timeReq = performance.now();
           sequentialSearch(randArray, size);
